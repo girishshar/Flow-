@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Boiler Questionnaire</title>
+<style>
+ body{font-family:Arial, sans-serif;background:#e9eef5;padding:30px;margin:0}
+ .container{width:900px;max-width:100%;margin:auto;background:#fff;padding:40px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15);overflow:hidden;box-sizing:border-box}
+ h1{text-align:center;margin-bottom:30px;font-size:28px;color:#222;font-weight:700;letter-spacing:0.5px}
+ .question{margin:28px 0 12px;font-weight:bold;font-size:18px;color:#1a1a1a}
+ .option{margin:10px 0;display:flex;align-items:center;gap:12px;font-size:16px;color:#333;padding:8px 12px;border-radius:8px;transition:0.2s}
+ .option:hover{background:#f1f5ff}
+ input[type="checkbox"], input[type="radio"]{transform:scale(1.3);cursor:pointer}
+ #totalBox{margin-top:35px;font-size:26px;font-weight:bold;color:#0b7dff;text-align:center;padding:20px;border-radius:10px;background:#f0f6ff;border:1px solid #c5deff}
+ button{cursor:pointer;background:#0b7dff;color:#fff;border:none;padding:12px 28px;font-size:18px;border-radius:8px;margin-top:25px;display:block;margin-left:auto;margin-right:auto;transition:0.2s}
+ button:hover{background:#005fcc}
+ input[type="text"]{padding:10px;width:320px;font-size:16px;border:1px solid #bbb;border-radius:6px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Boiler Questionnaire</h1>
+<script>
+ let total = 0;
+ let selectedValues = {}; // store selected price per question
+
+ function togglePrice(input, price){
+   const qName = input.name || input.getAttribute('data-q');
+
+   // RADIO buttons (only one allowed)
+   if(input.type === 'radio'){
+       if(selectedValues[qName]){
+           total -= selectedValues[qName];
+       }
+       selectedValues[qName] = price;
+       total += price;
+   }
+
+   // CHECKBOX (toggle add/remove)
+   if(input.type === 'checkbox'){
+       if(input.checked){
+           total += price;
+           selectedValues[qName + '_' + price] = price;
+       } else {
+           total -= price;
+           delete selectedValues[qName + '_' + price];
+       }
+   }
+
+   if(total < 0) total = 0;
+   document.getElementById('totalBox').innerText = "Total Price: £" + total;
+ }
+</script>
+
+<div class="question">1. Are you a homeowner or a landlord?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">Homeowner</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,60)">Landlord</label>
+
+<div class="question">2. What kind of fuel does your boiler use?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,80)">Gas</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,90)">LPG</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,100)">Oil</label>
+
+<div class="question">3. What type of boiler do you currently have?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,70)">Combi</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,60)">Standard</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">System</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">Back Boiler</label>
+
+<div class="question">4. How would you describe your current boiler?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,90)">Not working</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,70)">Old & inefficient</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">Doesn't fit with plans</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">Other</label>
+
+<div class="question">5. Is your boiler mounted on the wall?</div>
+<label class="option"><input type="radio" name="q5" onclick="togglePrice(this,40)">Yes</label>
+<label class="option"><input type="radio" name="q5" onclick="togglePrice(this,50)">No</label>
+<div class="question">6. Roughly how old is your boiler?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">Up to 10</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">10–20</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">20–25</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">25+</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,10)">Don't know</label>
+
+<div class="question">7. How long will you stay in your home?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">Up to 1 year</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">1–5</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">6–10</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">10+</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,15)">I don't know</label>
+
+<div class="question">8. Do you want your boiler in a different place?</div>
+<label class="option"><input type="radio" name="q8" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="q8" onclick="togglePrice(this,20)">No</label>
+<div class="question">9. Which best describes your home?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,80)">Detached</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,60)">Semi-Detached</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">Terraced</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">Flat</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,55)">Bungalow</label>
+
+<div class="question">10. How many bedrooms?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">3</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">4</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,60)">5</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,70)">6+</label>
+
+<div class="question">11. How many bathtubs?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">3+</label>
+
+<div class="question">12. How many showers?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">2+</label>
+
+<div class="question">13. How many radiators?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">0–5</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,40)">6–9</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,50)">10–13</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,60)">14–16</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,70)">17+</label>
+
+<div class="question">14. Thermostatic Radiator Valves?</div>
+<label class="option"><input type="radio" name="q14" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="q14" onclick="togglePrice(this,20)">No</label>
+<div class="question">15. Do you have a water meter?</div>
+<label class="option"><input type="radio" name="q15" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="q15" onclick="togglePrice(this,15)">No</label>
+<div class="question">16. Where does your flue come out?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,30)">Roof</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">Wall</label>
+
+<div class="question">17. Is your flue on a sloped or flat roof?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,25)">Sloped</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,15)">Flat</label>
+
+<div class="question">18. Roof flue position?</div>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,20)">Highest 2/3</label>
+<label class="option"><input type="checkbox" onclick="togglePrice(this,10)">Lowest 1/3</label>
+
+<div class="question">19. FINAL STEP: Enter postcode of installation location</div>
+<input type="text" style="padding:8px;width:300px;font-size:15px;border:1px solid #ccc;border-radius:5px;">
+
+<button onclick="document.getElementById('totalBox').style.display='block'" style="margin-top:20px;padding:10px 20px;font-size:16px;">Submit</button>
+
+<div id="totalBox" style="display:none">Total Price: £0</div>
+
