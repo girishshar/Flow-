@@ -31,12 +31,14 @@ let selectedValues = {};
 function togglePrice(input, price){
     const qName = input.name || input.getAttribute('data-q');
 
+    // RADIO
     if(input.type === 'radio'){
        if(selectedValues[qName]) total -= selectedValues[qName];
        selectedValues[qName] = price;
        total += price;
     }
 
+    // CHECKBOX
     if(input.type === 'checkbox'){
        if(input.checked){
          total += price;
@@ -46,17 +48,14 @@ function togglePrice(input, price){
          delete selectedValues[qName + '_' + price];
        }
     }
-
     document.getElementById('totalBox').innerText = "Total Price: £" + total;
 }
 
-// SHOW HOMEOWNER FLOW
 function showHomeowner(){
     document.getElementById("homeownerFlow").style.display = "block";
     document.getElementById("landlordFlow").style.display = "none";
 }
 
-// SHOW LANDLORD FLOW
 function showLandlord(){
     document.getElementById("landlordFlow").style.display = "block";
     document.getElementById("homeownerFlow").style.display = "none";
@@ -67,221 +66,225 @@ function showLandlord(){
 <div class="question">Are you a homeowner or a landlord?</div>
 
 <label class="option">
-  <input type="radio" name="chooseUser" onclick="togglePrice(this,0); showHomeowner();"> Homeowner
+  <input type="radio" name="chooseUser" onclick="togglePrice(this,50); showHomeowner();"> Homeowner
 </label>
 
 <label class="option">
-  <input type="radio" name="chooseUser" onclick="togglePrice(this,0); showLandlord();"> Landlord
+  <input type="radio" name="chooseUser" onclick="togglePrice(this,60); showLandlord();"> Landlord
 </label>
 
 <br><hr><br>
 
 <!-- =====================================================
-          HOMEOWNER FULL FLOW
+          HOMEOWNER FLOW
 ====================================================== -->
 
 <div id="homeownerFlow" style="display:none;">
 
 <div class="question">What kind of fuel does your boiler use?</div>
-<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,0)">Gas</label>
-<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,0)">LPG</label>
-<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,0)">Oil</label>
+<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,100)">Gas</label>
+<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,120)">LPG</label>
+<label class="option"><input type="radio" name="hfuel" onclick="togglePrice(this,150)">Oil</label>
 
 <div class="question">Currently, what type of boiler do you have?</div>
-<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,0)">Combi</label>
-<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,0)">Standard</label>
-<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,0)">System</label>
-<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,0)">Back Boiler</label>
+<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,90)">Combi</label>
+<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,80)">Standard</label>
+<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,85)">System</label>
+<label class="option"><input type="radio" name="hboiler" onclick="togglePrice(this,70)">Back Boiler</label>
 
 <div class="question">How would you describe your current boiler?</div>
-<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,0)">Not working</label>
-<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,0)">Old & inefficient</label>
-<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,0)">Doesn't fit with our plans</label>
-<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,0)">Other</label>
+<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,100)">Not working</label>
+<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,80)">Old & inefficient</label>
+<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,40)">Doesn't fit plans</label>
+<label class="option"><input type="radio" name="hdesc" onclick="togglePrice(this,30)">Other</label>
 
 <div class="question">Is your boiler mounted on the wall?</div>
-<label class="option"><input type="radio" name="hmount" onclick="togglePrice(this,0)">Yes it is wall mounted</label>
-<label class="option"><input type="radio" name="hmount" onclick="togglePrice(this,0)">No it is floor standing</label>
+<label class="option"><input type="radio" name="hmount" onclick="togglePrice(this,40)">Wall mounted</label>
+<label class="option"><input type="radio" name="hmount" onclick="togglePrice(this,50)">Floor standing</label>
 
 <div class="question">Roughly how old is your boiler?</div>
-<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,0)">Up to 10 years</label>
-<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,0)">10–20 years</label>
-<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,0)">20–25 years</label>
-<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,0)">25+ years</label>
-<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,0)">I don't know</label>
+<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,20)">Up to 10 years</label>
+<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,30)">10–20 years</label>
+<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,40)">20–25 years</label>
+<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,50)">25+ years</label>
+<label class="option"><input type="radio" name="hage" onclick="togglePrice(this,10)">I don't know</label>
 
 <div class="question">How long do you see yourself living in your current home?</div>
-<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,0)">Up to 1 year</label>
-<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,0)">1–5 years</label>
-<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,0)">6–10 years</label>
-<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,0)">10+ years</label>
-<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,0)">I don't know</label>
+<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,20)">Up to 1 year</label>
+<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,30)">1–5 years</label>
+<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,40)">6–10 years</label>
+<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,50)">10+ years</label>
+<label class="option"><input type="radio" name="hlive" onclick="togglePrice(this,15)">I don't know</label>
 
 <div class="question">Do you want your new boiler in a different place?</div>
-<label class="option"><input type="radio" name="hplace" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="hplace" onclick="togglePrice(this,0)">No</label>
+<label class="option"><input type="radio" name="hplace" onclick="togglePrice(this,30)">Yes</label>
+<label class="option"><input type="radio" name="hplace" onclick="togglePrice(this,10)">No</label>
 
-<div class="question">Which best describes your home?</div>
-<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,0)">Detached</label>
-<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,0)">Semi-Detached</label>
-<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,0)">Terraced</label>
-<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,0)">Flat</label>
-<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,0)">Bungalow</label>
+<div class="question">Which of these best describes your home?</div>
+<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,80)">Detached</label>
+<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,60)">Semi-Detached</label>
+<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,50)">Terraced</label>
+<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,40)">Flat</label>
+<label class="option"><input type="radio" name="hhome" onclick="togglePrice(this,55)">Bungalow</label>
+
+<div class="question">Is your bungalow on one or two floors?</div>
+<label class="option"><input type="radio" name="hfloors" onclick="togglePrice(this,30)">One floor</label>
+<label class="option"><input type="radio" name="hfloors" onclick="togglePrice(this,40)">Two floors</label>
 
 <div class="question">How many bedrooms do you have?</div>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">1 bedroom</label>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">2 bedrooms</label>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">3 bedrooms</label>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">4 bedrooms</label>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">5 bedrooms</label>
-<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,0)">6+ bedrooms</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,40)">3</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,50)">4</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,60)">5</label>
+<label class="option"><input type="radio" name="hbed" onclick="togglePrice(this,70)">6+</label>
 
 <div class="question">How many bathtubs do you have?</div>
-<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,0)">0</label>
-<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,0)">1</label>
-<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,0)">2</label>
-<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,0)">3+</label>
+<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="radio" name="hbathtub" onclick="togglePrice(this,40)">3+</label>
 
 <div class="question">How many separate showers?</div>
-<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,0)">0</label>
-<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,0)">1</label>
-<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,0)">2+</label>
+<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="hshower" onclick="togglePrice(this,30)">2+</label>
 
 <div class="question">How many radiators do you have?</div>
-<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,0)">0–5</label>
-<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,0)">6–9</label>
-<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,0)">10–13</label>
-<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,0)">14–16</label>
-<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,0)">17+</label>
+<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,30)">0–5</label>
+<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,40)">6–9</label>
+<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,50)">10–13</label>
+<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,60)">14–16</label>
+<label class="option"><input type="radio" name="hrad" onclick="togglePrice(this,70)">17+</label>
 
 <div class="question">Do you have TRVs?</div>
-<label class="option"><input type="radio" name="htrv" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="htrv" onclick="togglePrice(this,0)">No</label>
+<label class="option"><input type="radio" name="htrv" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="htrv" onclick="togglePrice(this,20)">No</label>
 
 <div class="question">Do you have a water meter?</div>
-<label class="option"><input type="radio" name="hwater" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="hwater" onclick="togglePrice(this,0)">No</label>
+<label class="option"><input type="radio" name="hwater" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="hwater" onclick="togglePrice(this,15)">No</label>
 
 <div class="question">Where does your flue come out?</div>
-<label class="option"><input type="radio" name="hflue" onclick="togglePrice(this,0)">Roof</label>
-<label class="option"><input type="radio" name="hflue" onclick="togglePrice(this,0)">Wall</label>
+<label class="option"><input type="radio" name="hflue" onclick="togglePrice(this,30)">Roof</label>
+<label class="option"><input type="radio" name="hflue" onclick="togglePrice(this,20)">Wall</label>
 
-<div class="question">Is your flue on a sloped or flat roof?</div>
-<label class="option"><input type="radio" name="hroof" onclick="togglePrice(this,0)">Sloped</label>
-<label class="option"><input type="radio" name="hroof" onclick="togglePrice(this,0)">Flat</label>
+<div class="question">Is your flue on a sloped roof or a flat roof?</div>
+<label class="option"><input type="radio" name="hroof" onclick="togglePrice(this,25)">Sloped</label>
+<label class="option"><input type="radio" name="hroof" onclick="togglePrice(this,15)">Flat</label>
 
 <div class="question">Where on the roof is it positioned?</div>
-<label class="option"><input type="radio" name="hpos" onclick="togglePrice(this,0)">Highest two-thirds</label>
-<label class="option"><input type="radio" name="hpos" onclick="togglePrice(this,0)">Lowest third</label>
+<label class="option"><input type="radio" name="hpos" onclick="togglePrice(this,20)">Highest two-thirds</label>
+<label class="option"><input type="radio" name="hpos" onclick="togglePrice(this,10)">Lowest third</label>
 
-<div class="question">Enter the installation postcode</div>
+<div class="question">Enter postcode of installation location</div>
 <input type="text">
 
 </div>
 
 <!-- =====================================================
-          LANDLORD FULL FLOW
+          LANDLORD FLOW
 ====================================================== -->
 
 <div id="landlordFlow" style="display:none;">
 
 <div class="question">What kind of fuel does your boiler use?</div>
-<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,0)">Gas</label>
-<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,0)">LPG</label>
-<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,0)">Oil</label>
+<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,100)">Gas</label>
+<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,120)">LPG</label>
+<label class="option"><input type="radio" name="lfuel" onclick="togglePrice(this,150)">Oil</label>
 
 <div class="question">Currently, what type of boiler do you have?</div>
-<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,0)">Combi</label>
-<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,0)">Standard</label>
-<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,0)">System</label>
-<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,0)">Back Boiler</label>
+<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,90)">Combi</label>
+<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,80)">Standard</label>
+<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,85)">System</label>
+<label class="option"><input type="radio" name="lboiler" onclick="togglePrice(this,70)">Back Boiler</label>
 
 <div class="question">How would you describe your current boiler?</div>
-<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,0)">Not working</label>
-<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,0)">Old & inefficient</label>
-<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,0)">Doesn't fit with our plans</label>
-<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,0)">Other</label>
+<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,100)">Not working</label>
+<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,80)">Old & inefficient</label>
+<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,40)">Doesn't fit plans</label>
+<label class="option"><input type="radio" name="ldesc" onclick="togglePrice(this,30)">Other</label>
 
 <div class="question">Is your boiler mounted on the wall?</div>
-<label class="option"><input type="radio" name="lmount" onclick="togglePrice(this,0)">Yes it is wall mounted</label>
-<label class="option"><input type="radio" name="lmount" onclick="togglePrice(this,0)">No it is floor standing</label>
+<label class="option"><input type="radio" name="lmount" onclick="togglePrice(this,40)">Wall mounted</label>
+<label class="option"><input type="radio" name="lmount" onclick="togglePrice(this,50)">Floor standing</label>
 
 <div class="question">Roughly how old is your boiler?</div>
-<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,0)">Up to 10 years</label>
-<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,0)">10–20 years</label>
-<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,0)">20–25 years</label>
-<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,0)">25+ years</label>
-<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,0)">I don't know</label>
+<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,20)">Up to 10 years</label>
+<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,30)">10–20 years</label>
+<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,40)">20–25 years</label>
+<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,50)">25+ years</label>
+<label class="option"><input type="radio" name="lage" onclick="togglePrice(this,10)">I don't know</label>
 
 <div class="question">How long do you see yourself owning your property?</div>
-<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,0)">Up to 1 year</label>
-<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,0)">1–5 years</label>
-<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,0)">6–10 years</label>
-<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,0)">10+ years</label>
-<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,0)">I don't know</label>
+<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,20)">Up to 1 year</label>
+<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,30)">1–5 years</label>
+<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,40)">6–10 years</label>
+<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,50)">10+ years</label>
+<label class="option"><input type="radio" name="lown" onclick="togglePrice(this,15)">I don't know</label>
 
 <div class="question">Do you want your new boiler in a different place?</div>
-<label class="option"><input type="radio" name="lplace" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="lplace" onclick="togglePrice(this,0)">No</label>
+<label class="option"><input type="radio" name="lplace" onclick="togglePrice(this,30)">Yes</label>
+<label class="option"><input type="radio" name="lplace" onclick="togglePrice(this,10)">No</label>
 
 <div class="question">Which best describes your home?</div>
-<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,0)">Detached</label>
-<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,0)">Semi-Detached</label>
-<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,0)">Terraced</label>
-<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,0)">Flat</label>
-<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,0)">Bungalow</label>
+<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,80)">Detached</label>
+<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,60)">Semi-Detached</label>
+<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,50)">Terraced</label>
+<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,40)">Flat</label>
+<label class="option"><input type="radio" name="lhome" onclick="togglePrice(this,55)">Bungalow</label>
 
 <div class="question">Is your bungalow on one or two floors?</div>
-<label class="option"><input type="radio" name="lfloors" onclick="togglePrice(this,0)">One floor</label>
-<label class="option"><input type="radio" name="lfloors" onclick="togglePrice(this,0)">Two floors</label>
+<label class="option"><input type="radio" name="lfloors" onclick="togglePrice(this,30)">One floor</label>
+<label class="option"><input type="radio" name="lfloors" onclick="togglePrice(this,40)">Two floors</label>
 
-<div class="question">How many bedrooms do you have?</div>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">1 bedroom</label>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">2 bedrooms</label>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">3 bedrooms</label>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">4 bedrooms</label>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">5 bedrooms</label>
-<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,0)">6+ bedrooms</label>
+<div class="question">How many bedrooms?</div>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,40)">3</label>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,50)">4</label>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,60)">5</label>
+<label class="option"><input type="radio" name="lbed" onclick="togglePrice(this,70)">6+</label>
 
 <div class="question">How many bathtubs do you have?</div>
-<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,0)">0</label>
-<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,0)">1</label>
-<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,0)">2</label>
-<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,0)">3+</label>
+<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,30)">2</label>
+<label class="option"><input type="radio" name="lbathtub" onclick="togglePrice(this,40)">3+</label>
 
 <div class="question">How many separate showers?</div>
-<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,0)">0</label>
-<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,0)">1</label>
-<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,0)">2+</label>
+<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,10)">0</label>
+<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,20)">1</label>
+<label class="option"><input type="radio" name="lshower" onclick="togglePrice(this,30)">2+</label>
 
-<div class="question">How many radiators do you have?</div>
-<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,0)">0–5</label>
-<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,0)">6–9</label>
-<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,0)">10–13</label>
-<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,0)">14–16</label>
-<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,0)">17+</label>
+<div class="question">How many radiators?</div>
+<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,30)">0–5</label>
+<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,40)">6–9</label>
+<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,50)">10–13</label>
+<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,60)">14–16</label>
+<label class="option"><input type="radio" name="lrad" onclick="togglePrice(this,70)">17+</label>
 
-<div class="question">Do you have Thermostatic Radiator Valves?</div>
-<label class="option"><input type="radio" name="ltrv" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="ltrv" onclick="togglePrice(this,0)">No</label>
+<div class="question">Do you have TRVs?</div>
+<label class="option"><input type="radio" name="ltrv" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="ltrv" onclick="togglePrice(this,20)">No</label>
 
 <div class="question">Do you have a water meter?</div>
-<label class="option"><input type="radio" name="lwater" onclick="togglePrice(this,0)">Yes</label>
-<label class="option"><input type="radio" name="lwater" onclick="togglePrice(this,0)">No</label>
+<label class="option"><input type="radio" name="lwater" onclick="togglePrice(this,10)">Yes</label>
+<label class="option"><input type="radio" name="lwater" onclick="togglePrice(this,15)">No</label>
 
 <div class="question">Where does your flue come out?</div>
-<label class="option"><input type="radio" name="lflue" onclick="togglePrice(this,0)">Roof</label>
-<label class="option"><input type="radio" name="lflue" onclick="togglePrice(this,0)">Wall</label>
+<label class="option"><input type="radio" name="lflue" onclick="togglePrice(this,30)">Roof</label>
+<label class="option"><input type="radio" name="lflue" onclick="togglePrice(this,20)">Wall</label>
 
-<div class="question">Is your flue on a sloped or flat roof?</div>
-<label class="option"><input type="radio" name="lroof" onclick="togglePrice(this,0)">Sloped</label>
-<label class="option"><input type="radio" name="lroof" onclick="togglePrice(this,0)">Flat</label>
+<div class="question">Is your flue on a sloped roof or a flat roof?</div>
+<label class="option"><input type="radio" name="lroof" onclick="togglePrice(this,25)">Sloped</label>
+<label class="option"><input type="radio" name="lroof" onclick="togglePrice(this,15)">Flat</label>
 
 <div class="question">Where on the roof is it positioned?</div>
-<label class="option"><input type="radio" name="lpos" onclick="togglePrice(this,0)">Highest two-thirds</label>
-<label class="option"><input type="radio" name="lpos" onclick="togglePrice(this,0)">Lowest third</label>
+<label class="option"><input type="radio" name="lpos" onclick="togglePrice(this,20)">Highest two-thirds</label>
+<label class="option"><input type="radio" name="lpos" onclick="togglePrice(this,10)">Lowest third</label>
 
-<div class="question">Enter the installation postcode</div>
+<div class="question">Enter postcode of installation location</div>
 <input type="text">
 
 </div>
